@@ -1,5 +1,7 @@
 package br.com.alura.comex.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import br.com.alura.comex.dto.DadosCadastrarProduto;
@@ -27,9 +29,22 @@ public class ProdutoService {
                     return categoriaRepository.save(novaCategoria);
                 });
 
-        Produto produto = new Produto(dados);
-        produto.adicionaCategoria(categoria);
+        Optional<Produto> optionalProduto = produtoRepository.findByNome(dados.nome());
 
-        produtoRepository.save(produto);
+        if (optionalProduto.isPresent()) {
+            // Se o produto já existe, vamos atualizá-lo.
+            Produto produtoExistente = optionalProduto.get();
+            if (produtoExistente.getCategorias().contains(categoria)) {
+                // Se a categoria já está associada, lançamos a exceção esperada.
+                throw new RuntimeException("Produto já cadastrado nessa categoria.");
+            }
+            // Se não, adiciona a nova categoria ao produto existente.
+            produtoExistente.adicionaCategoria(categoria);
+        } else {
+            // Se o produto não existe, criamos um novo.
+            Produto produtoNovo = new Produto(dados);
+            produtoNovo.adicionaCategoria(categoria);
+            produtoRepository.save(produtoNovo);
+        }
     }
 }

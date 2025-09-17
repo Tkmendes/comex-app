@@ -21,7 +21,7 @@ public class ProdutoService {
     }
 
     public void cadastrarProduto(DadosCadastrarProduto dados) {
-        Categoria categoria = categoriaRepository.findByNome(dados.categoria())
+        Categoria categoria = categoriaRepository.findByNome(dados.categoria().toUpperCase())
                 .orElseGet(() -> {
                     Categoria novaCategoria = new Categoria();
                     novaCategoria.setNome(dados.categoria());
@@ -40,6 +40,7 @@ public class ProdutoService {
             }
             // Se não, adiciona a nova categoria ao produto existente.
             produtoExistente.adicionaCategoria(categoria);
+            produtoRepository.save(produtoExistente);
         } else {
             // Se o produto não existe, criamos um novo.
             Produto produtoNovo = new Produto(dados);

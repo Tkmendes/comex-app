@@ -16,9 +16,6 @@ public class CategoriaService {
     }
 
     public void cadastrarCategoria(DadosCadastrarCategoria dados) {
-        Categoria categoria = new Categoria();
-        categoria.setNome(dados.nome());
-        categoria.setStatus(true);
 
         categoriaRepository.findByNome(dados.nome()).ifPresentOrElse(
                 categoriaExistente -> {
@@ -32,6 +29,9 @@ public class CategoriaService {
                 },
                 () -> {
                     // Lógica se a categoria não existe: cria uma nova.
+                    Categoria categoria = new Categoria();
+                    categoria.setNome(dados.nome());
+                    categoria.setStatus(true);
                     categoriaRepository.save(categoria);
                 });
     }

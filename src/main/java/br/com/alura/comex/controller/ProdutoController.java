@@ -1,11 +1,15 @@
 package br.com.alura.comex.controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.comex.dto.DadosCadastrarProduto;
+import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.service.ProdutoService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -23,5 +27,10 @@ public class ProdutoController {
     @Transactional
     public void cadastrarProduto(@Valid @RequestBody DadosCadastrarProduto dados) {
         produtoService.cadastrarProduto(dados);
+    }
+
+    @GetMapping
+    public List<Produto> listarProdutos() {
+        return produtoService.listarProdutos();
     }
 }

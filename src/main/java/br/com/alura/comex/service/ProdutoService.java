@@ -1,5 +1,6 @@
 package br.com.alura.comex.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -47,5 +48,9 @@ public class ProdutoService {
             produtoNovo.adicionaCategoria(categoria);
             produtoRepository.save(produtoNovo);
         }
+    }
+
+    public List<Produto> listarProdutos() {
+        return produtoRepository.findAll();
     }
 }

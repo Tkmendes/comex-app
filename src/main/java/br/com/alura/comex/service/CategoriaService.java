@@ -1,5 +1,7 @@
 package br.com.alura.comex.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import br.com.alura.comex.dto.DadosCadastrarCategoria;
@@ -34,6 +36,10 @@ public class CategoriaService {
                     categoria.setStatus(true);
                     categoriaRepository.save(categoria);
                 });
+    }
+
+    public List<Categoria> listarTodasCategorias() {
+        return categoriaRepository.findAll();
     }
 
 }

@@ -1,3 +1,19 @@
+INSERT INTO usuarios (nome, login, senha)
+VALUES (
+        'João Silva',
+        'joao.silva@example.com',
+        '$2a$10$iqgT9I8BdrQTE4InATWGyuYmnZmtEflyIJbh4REw9RvsrTg015Jxm'
+    ),
+    (
+        'Maria Oliveira',
+        'maria.oliveira@example.com',
+        '$2a$10$iqgT9I8BdrQTE4InATWGyuYmnZmtEflyIJbh4REw9RvsrTg015Jxm'
+    ),
+    (
+        'Carlos Souza',
+        'carlos.souza@example.com',
+        '$2a$10$iqgT9I8BdrQTE4InATWGyuYmnZmtEflyIJbh4REw9RvsrTg015Jxm'
+    );
 insert into clientes (
         cpf,
         nome,
@@ -7,7 +23,8 @@ insert into clientes (
         bairro,
         cidade,
         uf,
-        cep
+        cep,
+        usuario_id
     )
 values (
         '123.456.789-00',
@@ -18,7 +35,8 @@ values (
         'Bairro B',
         'Cidade C',
         'SP',
-        '12345-678'
+        '12345-678',
+        1
     ),
     (
         '987.654.321-00',
@@ -29,7 +47,8 @@ values (
         'Bairro Y',
         'Cidade Z',
         'RJ',
-        '87654-321'
+        '87654-321',
+        2
     ),
     (
         '456.789.123-00',
@@ -40,12 +59,16 @@ values (
         'Bairro W',
         'Cidade V',
         'MG',
-        '65432-109'
+        '65432-109',
+        3
     );
 insert into categorias (nome, status)
 values ('Eletrônicos', true),
     ('Móveis', true),
-    ('Eletrodomésticos', true);
+    ('Eletrodomésticos', true),
+    ('Casa', true),
+    ('Informática', true),
+    ('Esportes', true);
 insert into produtos (nome, preco, descricao, quantidade)
 values (
         'Smartphone',
@@ -68,4 +91,6 @@ values (
 insert into categoria_produto (categoria_id, produto_id)
 values (1, 1),
     (2, 2),
-    (3, 3);
+    (3, 3),
+    (4, 2),
+    (4, 3);

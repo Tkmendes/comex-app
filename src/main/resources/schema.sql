@@ -1,3 +1,10 @@
+drop table if exists usuarios;
+create table usuarios (
+    id bigint auto_increment primary key,
+    nome varchar(255),
+    login varchar(255),
+    senha varchar(255)
+);
 drop table if exists clientes;
 create table clientes (
     id bigint auto_increment primary key,
@@ -9,7 +16,9 @@ create table clientes (
     bairro varchar(100),
     cidade varchar(50),
     uf char(2),
-    cep char(9)
+    cep char(9),
+    usuario_id bigint,
+    foreign key (usuario_id) references usuarios (id)
 );
 drop table if exists categoria_produto;
 drop table if exists categorias;

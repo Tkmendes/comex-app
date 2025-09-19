@@ -21,4 +21,9 @@ public class TratadorDeErros {
         return ResponseEntity.badRequest().body(erros);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> tratarErro500(Exception ex) {
+        return ResponseEntity.internalServerError().body(ex.getMessage());
+    }
+
 }
